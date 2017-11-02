@@ -2,29 +2,29 @@
 
 let cardsArray = [];
 let flippedCards = [];
-let numberOfCards = 2;
 
-(function() {
   function startGame(numberOfCards) {
     clear();
     createCardArray(numberOfCards);
     createCards();
     cardClick();
-    gameMode();
+
   } // startGame
 
   function clear() {
     let cardsDiv = document.querySelector(".cards");
     cardsDiv.innerHTML = "";
+    cardsDiv.classList.remove('select');
+    cardsArray = [];
   } // clear
 
   function gameMode() {
     let easybtn = document.getElementById('easy');
     let medbtn = document.getElementById('med');
     let hardbtn = document.getElementById('hard');
-    if (easybtn && medbtn && hardbtn) {
+    if (easybtn) {
       easybtn.addEventListener('click', function() {
-        startGame(5);
+        startGame(1);
       })
       medbtn.addEventListener('click', function() {
         startGame(10);
@@ -35,7 +35,7 @@ let numberOfCards = 2;
     }
   } //gameMode
 
-  let createCardArray = function(numberOfCards) {
+  function createCardArray(numberOfCards) {
     for (let i = 1; i<= numberOfCards; i++) {
       cardsArray.push(i, i);
     }
@@ -46,7 +46,7 @@ let numberOfCards = 2;
      }
   } // createCardArray
 
-  let createCards = function() {
+  function createCards() {
     let cardsDiv = document.querySelector(".cards");
     for (let i = 0; i< cardsArray.length; i++) {
       let newCard = document.createElement("div");
@@ -61,7 +61,7 @@ let numberOfCards = 2;
     }
   } //createCards
 
-  let cardClick = function() {
+  function cardClick() {
     let cards = document.getElementsByClassName('card');
     for (let i = 0; i<cards.length; i++) {
       cards[i].addEventListener('click', function() {
@@ -86,14 +86,14 @@ let numberOfCards = 2;
     } else {
       setTimeout(flipBack, 700);
     }
-  }
+  } // checkMatch
 
   function flipBack() {
     flippedCards[0].classList.toggle('flipped');
     flippedCards[1].classList.toggle('flipped');
 
     flippedCards = [];
-  }
+  } // flipBack
 
   function winGame() {
     if (document.getElementsByClassName('match').length === cardsArray.length) {
@@ -101,18 +101,16 @@ let numberOfCards = 2;
       setTimeout(function() {
         cardsDiv.classList.add('slowFade');
       }, 1200);
-      window.setTimeout(function() {
+      setTimeout(function() {
         cardsDiv.classList.remove('slowFade');
         cardsDiv.classList.add('select');
         cardsDiv.innerHTML = "<div class='win'>You Win! Play Again?</div> \
-        <div><button id='easy' class='win2'>Easy</button> \
-        <button id='med' class='win2'>Medium</button> \
-        <button id='hard' class='win2'>Hard</button></div>";
+        <div class='win2'><button id='easy'>Easy</button> \
+        <button id='med'>Medium</button> \
+        <button id='hard'>Hard</button></div>";
       }, 2300);
+      setTimeout(gameMode,2301);
     }
-  }
+  } // winGame
 
-
-
-  startGame(1);
-})();
+  gameMode();

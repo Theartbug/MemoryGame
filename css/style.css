@@ -32,6 +32,10 @@ body {
   background-color: rgb(107, 46, 130);
 }
 
+h1 {
+  padding-bottom: 50px;
+}
+
 /******************MAIN STYLES
 ******************/
 
@@ -160,6 +164,7 @@ main{
 .win2 {
   animation: 1s ease-in 1.5s win2;
   animation-fill-mode: forwards;
+  opacity: 0;
 }
 
 .select {
@@ -168,7 +173,7 @@ main{
 
 button {
   background-color: rgb(66, 244, 170);
-  border: 2px solid rgb(239, 147, 67);
+  border: 5px solid rgb(239, 147, 67);
   color: white;
   height: 90px;
   width: 255px;
@@ -178,7 +183,30 @@ button {
   text-decoration: none;
   display: inline-block;
   border-radius: 13%;
-  opacity: 0;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  bottom: -50%;
+  left: -50%;
+  background: linear-gradient(to bottom, rgba(229, 172, 142, 0), rgba(255,255,255,0.5) 50%, rgba(229, 172, 142, 0));
+  transform: rotateZ(60deg) translate(-5em, 7.5em);
+}
+
+@keyframes sheen {
+  100% {
+    transform: rotateZ(60deg) translate(1em, -9em);
+  }
+}
+
+button:hover::after, button:focus::after {
+  animation: sheen 1.5s forwards;
 }
 
 /******************Footer
