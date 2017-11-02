@@ -148,7 +148,6 @@ main{
   animation: 1s win ease-in;
   animation-fill-mode: forwards;
   color: rgb(239, 147, 67);
-  padding-top: 50px;
   margin-bottom: 30px;
 }
 
@@ -187,6 +186,10 @@ button {
   position: relative;
   overflow: hidden;
 }
+
+/*
+The following shiny button animation is found here: https://cssanimation.rocks/pseudo-elements/
+*/
 
 button::after {
   content: '';

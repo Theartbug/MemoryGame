@@ -8,7 +8,6 @@ let flippedCards = [];
     createCardArray(numberOfCards);
     createCards();
     cardClick();
-
   } // startGame
 
   function clear() {
@@ -22,15 +21,19 @@ let flippedCards = [];
     let easybtn = document.getElementById('easy');
     let medbtn = document.getElementById('med');
     let hardbtn = document.getElementById('hard');
+    let timer = document.querySelector('.timer');
     if (easybtn) {
       easybtn.addEventListener('click', function() {
         startGame(1);
+        setTime(5, timer);
       })
       medbtn.addEventListener('click', function() {
         startGame(10);
+        setTime(100, timer);
       })
       hardbtn.addEventListener('click', function() {
         startGame(15);
+        setTime(120, timer);
       })
     }
   } //gameMode
@@ -71,7 +74,7 @@ let flippedCards = [];
 
           if (flippedCards.length === 2) {
             checkMatch();
-            winGame();
+            endGame();
           }
         }
       });
@@ -95,22 +98,46 @@ let flippedCards = [];
     flippedCards = [];
   } // flipBack
 
-  function winGame() {
-    if (document.getElementsByClassName('match').length === cardsArray.length) {
-      let cardsDiv = document.querySelector(".cards")
+  function endGame() {
+    let timer = document.querySelector('.timer').textContent;
+    if (document.getElementsByClassName('match').length === cardsArray.length || timer == '00:00') {
+      let cardsDiv = document.querySelector(".cards");
+      let timerDiv = document.querySelector('.timer');
       setTimeout(function() {
         cardsDiv.classList.add('slowFade');
       }, 1200);
       setTimeout(function() {
         cardsDiv.classList.remove('slowFade');
         cardsDiv.classList.add('select');
-        cardsDiv.innerHTML = "<div class='win'>You Win! Play Again?</div> \
-        <div class='win2'><button id='easy'>Easy</button> \
+          if (document.getElementsByClassName('match').length === cardsArray.length) {
+            cardsDiv.innerHTML = "<div class='win'>You Win! Play Again?</div>"
+          } else {
+            cardsDiv.innerHTML = "<div class='win'>Time Out! Play Again?</div>"
+          }
+        cardsDiv.innerHTML += "<div class='win2'><button id='easy'>Easy</button> \
         <button id='med'>Medium</button> \
         <button id='hard'>Hard</button></div>";
       }, 2300);
       setTimeout(gameMode,2301);
     }
-  } // winGame
+  } // endGame
+
+function setTime(duration, display) {
+  let timer = duration, minutes, seconds;
+  let interval = setInterval(function() {
+      minutes = parseInt(timer / 60, 10);
+      seconds = parseInt(timer % 60, 10);
+
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      seconds = seconds < 10 ? '0' + seconds : seconds;
+
+      display.textContent = minutes + ":" + seconds;
+
+      if (--timer < 0 || document.getElementsByClassName('match').length === cardsArray.length) {
+        clearInterval(interval);
+        endGame();
+      }
+    }, 1000);
+} // setTime
 
   gameMode();
