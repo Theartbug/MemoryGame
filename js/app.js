@@ -2,15 +2,38 @@
 
 let cardsArray = [];
 let flippedCards = [];
-let numberOfCards = 6;
+let numberOfCards = 2;
 
 (function() {
-    function startGame(numberOfCards) {
-      createCardArray(numberOfCards);
-      createCards();
-      cardClick();
-
+  function startGame(numberOfCards) {
+    clear();
+    createCardArray(numberOfCards);
+    createCards();
+    cardClick();
+    gameMode();
   } // startGame
+
+  function clear() {
+    let cardsDiv = document.querySelector(".cards");
+    cardsDiv.innerHTML = "";
+  } // clear
+
+  function gameMode() {
+    let easybtn = document.getElementById('easy');
+    let medbtn = document.getElementById('med');
+    let hardbtn = document.getElementById('hard');
+    if (easybtn && medbtn && hardbtn) {
+      easybtn.addEventListener('click', function() {
+        startGame(5);
+      })
+      medbtn.addEventListener('click', function() {
+        startGame(10);
+      })
+      hardbtn.addEventListener('click', function() {
+        startGame(15);
+      })
+    }
+  } //gameMode
 
   let createCardArray = function(numberOfCards) {
     for (let i = 1; i<= numberOfCards; i++) {
@@ -48,6 +71,7 @@ let numberOfCards = 6;
 
           if (flippedCards.length === 2) {
             checkMatch();
+            winGame();
           }
         }
       });
@@ -71,15 +95,24 @@ let numberOfCards = 6;
     flippedCards = [];
   }
 
-  //
-  // let bindToCards = function() {
-  //   let cards = document.getElementsByClassName('card');
-  //   for (let i = 0; i<cards.length; i++) {
-  //     cards[i].addEventListener('click', function(){
-  //       this.cardClick;
-  //     }, false);
-  //   }
-  // }
+  function winGame() {
+    if (document.getElementsByClassName('match').length === cardsArray.length) {
+      let cardsDiv = document.querySelector(".cards")
+      setTimeout(function() {
+        cardsDiv.classList.add('slowFade');
+      }, 1200);
+      window.setTimeout(function() {
+        cardsDiv.classList.remove('slowFade');
+        cardsDiv.classList.add('select');
+        cardsDiv.innerHTML = "<div class='win'>You Win! Play Again?</div> \
+        <div><button id='easy' class='win2'>Easy</button> \
+        <button id='med' class='win2'>Medium</button> \
+        <button id='hard' class='win2'>Hard</button></div>";
+      }, 2300);
+    }
+  }
 
-  startGame(6);
+
+
+  startGame(1);
 })();

@@ -42,7 +42,8 @@ main{
 }
 
 .cards {
-  flex: 1 0 auto;
+  display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   perspective: 3000px;
   position: relative;
@@ -111,8 +112,73 @@ main{
 }
 
 .match {
-  animation: 1s flash ease-in-out;
-  animation-delay: .7s;
+  animation: 1s flash .7s ease-in-out;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.slowFade {
+  animation: 1.5s ease-out fade;
+  animation-fill-mode: forwards;
+}
+
+@keyframes win {
+  0% {
+    font-size: inherit;
+    opacity: 0;
+  }
+  100% {
+    font-size: 4rem;
+    opacity: 1;
+  }
+}
+
+.win {
+  animation: 1s win ease-in;
+  animation-fill-mode: forwards;
+  color: rgb(239, 147, 67);
+  padding-top: 50px;
+  margin-bottom: 30px;
+}
+
+@keyframes win2 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.win2 {
+  animation: 1s ease-in 1.5s win2;
+  animation-fill-mode: forwards;
+}
+
+.select {
+  flex-direction: column;
+}
+
+button {
+  background-color: rgb(66, 244, 170);
+  border: 2px solid rgb(239, 147, 67);
+  color: white;
+  height: 90px;
+  width: 255px;
+  margin: 4px;
+  font-size: 4rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 13%;
+  opacity: 0;
 }
 
 /******************Footer
