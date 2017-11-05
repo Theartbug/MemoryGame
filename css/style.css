@@ -32,12 +32,11 @@ body {
   background-color: rgb(107, 46, 130);
 }
 
-h1 {
+.heading {
   padding-bottom: 50px;
+  text-transform: uppercase;
+  font-size: 3rem;
 }
-
-/******************MAIN STYLES
-******************/
 
 main{
   flex: 1 0 auto;
@@ -45,6 +44,16 @@ main{
   padding-right: 5%;
 }
 
+/****************** GAME STYLES
+******************/
+
+.orange {
+  color: rgb(239, 147, 67);
+}
+
+.score span {
+  margin-left: 15px;
+}
 .cards {
   display: flex;
   justify-content: center;
@@ -101,6 +110,39 @@ main{
   display: inline-block;
   vertical-align: middle;
 }
+
+.select {
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-size: 2rem;
+  height: 50px;
+  margin-bottom: 15px;
+}
+
+button {
+  background-color: rgb(66, 244, 170);
+  border: 5px solid rgb(239, 147, 67);
+  color: white;
+  height: 90px;
+  width: 255px;
+  margin: 4px;
+  font-size: 4rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 13%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+/****************** ANIMATIONS
+******************/
 
 .flipped {
   transform: rotateY(180deg);
@@ -166,27 +208,6 @@ main{
   opacity: 0;
 }
 
-.select {
-  flex-direction: column;
-}
-
-button {
-  background-color: rgb(66, 244, 170);
-  border: 5px solid rgb(239, 147, 67);
-  color: white;
-  height: 90px;
-  width: 255px;
-  margin: 4px;
-  font-size: 4rem;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 13%;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
 /*
 The following shiny button animation is found here: https://cssanimation.rocks/pseudo-elements/
 */
@@ -199,12 +220,12 @@ button::after {
   bottom: -50%;
   left: -50%;
   background: linear-gradient(to bottom, rgba(229, 172, 142, 0), rgba(255,255,255,0.5) 50%, rgba(229, 172, 142, 0));
-  transform: rotateZ(60deg) translate(-5em, 7.5em);
+  transform: rotateZ(90deg) translate(-5em, 7.5em);
 }
 
 @keyframes sheen {
   100% {
-    transform: rotateZ(60deg) translate(1em, -9em);
+    transform: rotateZ(90deg) translate(1em, -9em);
   }
 }
 
