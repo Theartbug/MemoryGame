@@ -54,6 +54,11 @@ main{
 .score span {
   margin-left: 15px;
 }
+
+.bestScore span {
+  margin-left: 15px;
+}
+
 .cards {
   display: flex;
   justify-content: center;
